@@ -43,7 +43,9 @@ def fetch_codeforces_org_members(org_id="785"):
     }
     members = {}
     try:
-        res = requests.get(url, headers=headers, timeout=20)
+        import cloudscraper
+        scraper = cloudscraper.create_scraper()
+        res = scraper.get(url, headers=headers, timeout=20)
         if res.status_code == 200:
             soup = BeautifulSoup(res.text, 'html.parser')
             page_content = soup.find('div', id='pageContent')
